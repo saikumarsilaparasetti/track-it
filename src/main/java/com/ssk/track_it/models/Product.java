@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +21,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@Builder
+@Data
 public class Product {
 
     @Id
@@ -32,5 +36,8 @@ public class Product {
     private double discount;
     private int quantity;
     private String brand;
-
+    @Column(nullable = true)
+    private String image;
+    private Double rating;
+    private Integer ratingcount;
 }
