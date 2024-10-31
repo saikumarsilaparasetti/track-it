@@ -28,6 +28,10 @@ public class ProductService {
         return repo.findAll();
     }
 
+    public Product getProductById(int id){
+        return repo.findById(id).orElse(null);
+    }
+
     public Product updateProduct(int id, Product product){
         try {
             Optional<Product> existingProductOpt = repo.findById(id);

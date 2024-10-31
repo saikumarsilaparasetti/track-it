@@ -3,7 +3,7 @@ package com.ssk.track_it.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,9 +34,24 @@ public class ProductController {
 
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProductById(@PathVariable int id){
+        try {
+            // if(id == null){
+            //     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            // }
+
+            return new ResponseEntity<Product>(service.getProductById(id), HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/getall")
     public ResponseEntity<?> getAllProducts(){
         try {
+            System.err.println("=>product/getall");
             return new ResponseEntity<>(service.getAllProducts(), HttpStatus.OK);
         } catch (Exception e) {
             System.out.println(e);
