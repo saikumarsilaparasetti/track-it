@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssk.track_it.models.Product;
 import com.ssk.track_it.services.ProductService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -49,10 +50,16 @@ public class ProductController {
     }
 
     @PostMapping("/getall")
-    public ResponseEntity<?> getAllProducts(){
+    public ResponseEntity<?> getAllProducts(@RequestParam String query ){
         try {
             System.err.println("=>product/getall");
+            if(query != null && !query.isEmpty()){
+                
+                System.err.println("Query is:  "+query);
+                return new ResponseEntity<>(service.getAllProductsByQuery(query), HttpStatus.OK);
+            }
             return new ResponseEntity<>(service.getAllProducts(), HttpStatus.OK);
+            
         } catch (Exception e) {
             System.out.println(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

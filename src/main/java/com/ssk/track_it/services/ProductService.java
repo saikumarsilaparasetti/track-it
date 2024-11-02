@@ -28,6 +28,10 @@ public class ProductService {
         return repo.findAll();
     }
 
+    public List<Product> getAllProductsByQuery(String query){
+        return repo.findByNameContainingIgnoreCase(query);
+    }
+
     public Product getProductById(int id){
         return repo.findById(id).orElse(null);
     }
