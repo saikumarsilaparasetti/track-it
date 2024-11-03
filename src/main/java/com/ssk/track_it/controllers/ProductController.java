@@ -26,6 +26,7 @@ public class ProductController {
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
         System.err.println(product);
         try {
+            Thread.sleep(3000);
             return new ResponseEntity<Product>( service.createProduct(product), HttpStatus.OK);    
         } catch (Exception e) {
             System.out.println(e);
@@ -53,7 +54,8 @@ public class ProductController {
     public ResponseEntity<?> getAllProducts(@RequestParam String query ){
         try {
             System.err.println("=>product/getall");
-            if(query != null && !query.isEmpty()){
+            Thread.sleep(1000);
+            if(query != null && !query.isEmpty() && query != ""){
                 
                 System.err.println("Query is:  "+query);
                 return new ResponseEntity<>(service.getAllProductsByQuery(query), HttpStatus.OK);
@@ -69,6 +71,7 @@ public class ProductController {
     @PostMapping("/update/{id}")
     public ResponseEntity<?> updateProduct(@RequestBody Product product, @PathVariable int id){
         try {
+            System.err.println("Id is: "+id);
             return new ResponseEntity<>(service.updateProduct(id, product), HttpStatus.OK);
         } catch (Exception e) {
             System.out.println(e);

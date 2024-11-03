@@ -67,7 +67,7 @@ public class ProductService {
                     existingProduct.setQuantity(product.getQuantity());
                 }
                 System.out.println("get rating   "+product.getRating());
-                if(product.getRating() >=0){
+                if(product.getRating() != null && product.getRating() >=0){
                     existingProduct.setRating(product.getRating());
                 }
 
